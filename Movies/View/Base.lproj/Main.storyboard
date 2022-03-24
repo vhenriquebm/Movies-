@@ -23,10 +23,12 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tcF-uT-acn">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tcF-uT-acn">
                                 <rect key="frame" x="0.0" y="152" width="414" height="710"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.039215686270000001" green="0.10980392160000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="710" id="Y9Y-EB-QTL"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="9KG-wQ-3Ur"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="HNt-Le-cav"/>
@@ -35,6 +37,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.033439416440000001" green="0.14798650150000001" blue="0.25273722409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tcF-uT-acn" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Cg4-ld-49F"/>
+                            <constraint firstItem="tcF-uT-acn" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="o4O-Ia-GXN"/>
+                            <constraint firstItem="tcF-uT-acn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="x8n-FC-z0O"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Popular Movies" id="f7y-2r-VvB"/>
                     <connections>
@@ -55,7 +62,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Z3v-Yj-bLh">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Z3v-Yj-bLh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="446"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="446" id="17c-fG-dLK"/>

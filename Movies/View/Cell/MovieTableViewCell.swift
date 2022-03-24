@@ -24,6 +24,8 @@ class MovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var voteCount: UILabel!
     
+    @IBOutlet weak var bottomView: UIView!
+    
     
     // MARK: - Methods
     
@@ -49,6 +51,8 @@ class MovieTableViewCell: UITableViewCell {
                 DispatchQueue.main.async {
                     self.movieImage.image = UIImage(data: datas)
                     self.movieImage.layer.cornerRadius = 10
+                    self.bottomView.layer.cornerRadius = 40
+                    self.bottomView.alpha = 0.5
                 }
             }
             

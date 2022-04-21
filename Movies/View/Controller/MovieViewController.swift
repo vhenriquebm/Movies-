@@ -11,7 +11,8 @@ let reuseIdentifier = "cell"
 
 class MovieViewController: UIViewController, UISearchBarDelegate {
     
-    var dataList = [Result]()
+ let modelo = MovieViewModel()
+    
     var filteredData: [Result] = []
  
     //MARK: - OUTLETS
@@ -22,14 +23,33 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
+        updateView()
         configuraTableView()
         searchBar.delegate = self
-        filteredData = dataList
-        fetchMoviesData()
-        fetchMoviesDataPage2 ()
+       // filteredData = modelo.dataList
+        
+        
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateView()
+    }
+    
+    
     // MARK: - UITableView Registration
+    
+    func updateView () {
+        modelo.fetchMoviesData()
+        modelo.fetchMoviesDataPage2()
+        filteredData = modelo.dataList
+        tableView.reloadData()
+        print ( "A TableView foi atualizada")
+        print (filteredData)
+        print(modelo.dataList)
+    }
+    
+    
     
     func configuraTableView () {
         tableView.dataSource = self
@@ -88,10 +108,10 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         filteredData = []
         
         if searchText.isEmpty {
-            filteredData = dataList
+            filteredData = modelo.dataList
         } else {
             
-            for test in dataList {
+            for test in modelo.dataList {
                 
                 if test.title.uppercased().contains(searchText.uppercased()) {
                     
@@ -110,83 +130,7 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     
-    //MARK: - Fetch Movies Data
-    
-    func fetchMoviesData () {
-        
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=7f90c16b1428bbd2961cbdfd637dba99&language=pt-US&page=1") else {return}
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            
-            if let error = error {
-                
-                print ("error \(error.localizedDescription)")
-                
-                return
-            }
-            
-            if let data = data {
-                
-                do {
-                    let discover = try JSONDecoder().decode(MovieResult.self, from: data)
-                    
-                    DispatchQueue.main.async {
-                        
-                        self.dataList = discover.results
-                        self.filteredData = discover.results
-                        self.tableView.reloadData()
-                        
-                    }
-                    
-                } catch let error {
-                    
-                    print (error)
-                    return
-                }
-                
-            } else {
-                return
-            }
-            
-        } .resume()
-    }
-    
-    func fetchMoviesDataPage2 () {
-        
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=7f90c16b1428bbd2961cbdfd637dba99&language=pt-BR&page=2") else {return}
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            
-            if let error = error {
-                
-                print ("error \(error.localizedDescription)")
-                
-                return
-            }
-            
-            if let data = data {
-                
-                do {
-                    let discover = try JSONDecoder().decode(MovieResult.self, from: data)
-                    
-                    DispatchQueue.main.async {
-                        self.filteredData.append(contentsOf: discover.results)
-                        self.filteredData.append(contentsOf: discover.results)
-                        self.tableView.reloadData()
-                    }
-                    
-                } catch let error {
-                    
-                    print (error)
-                    return
-                }
-                
-            } else {
-                return
-            }
-            
-        } .resume()
-    }
+
 }
 
 
